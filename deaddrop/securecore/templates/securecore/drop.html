@@ -1,0 +1,33 @@
+{% extends 'securecore/base.html' %} {% block title %}{{drop.name}}{% endblock %} {% block content %}
+<div class="outer">
+  <div class="middle">
+    <div class="inner">
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
+          <p class="mono"><small><a href="{% url 'securecore:index' %}" class="blue">[Back]</a></small></p>
+          <h3 class="mono">{{drop.name}}</h3>
+          <p class="mono">{{drop.description}}</p>
+          <hr>
+          <div class="row">
+            <div class="col-md-3">
+              <span class="mono">Data type<br> <strong class="blue">{{drop.data_type}}</strong></span>
+            </div>
+            <div class="col-md-3">
+              <span class="mono">Downloads<br> <strong class="blue">{{drop.downloads}}{{drop.max_downloads_hr}}</strong></span>
+            </div>
+            <div class="col-md-3">
+              <span class="mono">Last modified<br> <strong class="blue">{{drop.created}}</strong></span>
+            </div>
+            <div class="col-md-3">
+              <span class="mono">Expires<br> <strong class="blue">{{drop.expires}}</strong></span>
+            </div>
+          </div>
+          <hr>
+          <h5><a class="mono" href="{% url 'securecore:downloaddrop' drop.id %}" onclick="reload()">[Download]</a></h5>
+        </div>
+      </div>
+    </div>
+  </div <hr>
+  </form>
+  {% endblock %}

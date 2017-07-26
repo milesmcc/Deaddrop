@@ -1,0 +1,5 @@
+
+*.sqlite3
+deaddrop/.DS_Store
+*.pyc
+.DS_Store

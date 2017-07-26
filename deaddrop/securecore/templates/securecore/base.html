@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>DeadDrop: {% block title %}secure data drops{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="{% static 'securecore/js/jquery.js' %}"></script>
+  <link rel='stylesheet' href="{% static 'securecore/css/base.css' %}">
+  <link rel='stylesheet' href="{% static 'securecore/css/bootstrap.base.css' %}">
+  <script src="{% static 'securecore/js/bootstrap.base.js' %}"></script>
+  <script src="{% static 'securecore/js/base.js' %}"></script>
+  <link rel='stylesheet' href="{% static 'securecore/css/bootstrap.min.css' %}">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand mono" href="{% url 'securecore:index' %}"><i class="fa fa-shield" aria-hidden="true"></i>&nbsp;DEADDROP</a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-left">
+          {% if logged_in %}
+          <li><a href='{% url "securecore:index" %}' class="mono white">Your Drops</a></li>
+          {% endif %}
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+          {% if logged_in %}
+          <li><a class="mono" style="color: #11CC11;">Authenticated for: <strong>{{ client.name }}</strong></a></li>
+          <li><a href='{% url "securecore:authlogout" %}' class="mono">[Log Out]</a></li>
+          {% else %}
+          <li><a class="mono" style="color: red;">You are not authenticated</a></li>
+          {% endif %}
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+  </nav>
+  <div class="container subnav">
+    <div class="content">{% block content %}???{% endblock %}</div>
+  </div>
+</body>
+</html>
