@@ -1,42 +1,31 @@
 {% extends 'securecore/base.html' %} {% block title %}Your Drops{% endblock %} {% block content %}
-<div class="outer">
-  <div class="middle">
-    <div class="inner">
-      <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-6">
-          <h3 class="mono">Available Drops</h3>
-          <h6 class="mono blue">
+<h3 class="mono">Available Drops</h3>
+<h6 class="mono blue">
             {% if drops %}
             You have <strong>{{drops|length}}</strong> drop(s).
             {% else %}
             No drops are currently available.
             {% endif %}
             </h6>
-          <hr> {% for drop in drops %}
-          <div class="drop">
-            <h6 class="mono">{{drop.name}}</h6>
-            <div class="row">
-              <div class="col-md-7">
-                <p class="mono">{{drop.description}}</p>
-                <a class="mono" href="{% url 'securecore:drop' drop.id %}"><strong>[More Info]</strong></a>
-                <a class="mono" href="{% url 'securecore:downloaddrop' drop.id %}">[Download]</a>
-              </div>
-              <div class="col-md-5">
-                <p class="mono">Data type: <strong class="blue">{{drop.data_type}}</strong></p>
-                <p class="mono">Downloads: <strong class="blue">{{drop.downloads}}{{drop.max_downloads_hr}}</strong></p>
-                {% if drop.expiration_date %}
-                <p class="mono red">Expires: <strong style="color: red;">{{drop.expires}}</strong></p>
-                {% endif %}
-              </div>
-            </div>
-          </div>
-          <hr> {% endfor %}
-          <p class="mono blue"><small>[end of drops]</small></p>
-        </div>
-      </div>
+<hr> {% for drop in drops %}
+<div class="drop">
+  <h6 class="mono">{{drop.name}}</h6>
+  <div class="row">
+    <div class="col-md-7">
+      <p class="mono">{{drop.description}}</p>
+      <a class="mono" href="{% url 'securecore:drop' drop.id %}"><strong>[More Info]</strong></a>
+      <a class="mono" href="{% url 'securecore:downloaddrop' drop.id %}">[Download]</a>
+    </div>
+    <div class="col-md-5">
+      <p class="mono">Data type: <strong class="blue">{{drop.data_type}}</strong></p>
+      <p class="mono">Downloads: <strong class="blue">{{drop.downloads}}{{drop.max_downloads_hr}}</strong></p>
+      {% if drop.expiration_date %}
+      <p class="mono red">Expires: <strong style="color: red;">{{drop.expires}}</strong></p>
+      {% endif %}
     </div>
   </div>
-</div <hr>
+</div>
+<hr> {% endfor %}
+<p class="mono blue"><small>[end of drops]</small></p>
 </form>
 {% endblock %}

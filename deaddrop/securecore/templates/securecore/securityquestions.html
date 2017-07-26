@@ -1,38 +1,25 @@
 {% extends 'securecore/base.html' %} {% block title %}Verify your Identity{% endblock %} {% block content %}
 <form action="{% url 'securecore:authsecurityquestions' %}" method="post">
-  <div class="outer">
-    <div class="middle">
-      <div class="inner">
-        <div class="row">
-          <div class="col-md-2"></div>
-          <div class="col-md-6">
-            <h3 class="mono">{{greeting}}</h3>
-            <h6 class="mono blue">Authenticating for <samp><strong>{{ client.code }}</strong></samp>.</h6>
-            {% if success %}
-            <hr>
-            <p class="mono green">{{success}}</p>
-            {% endif %} {% if error %}
-            <hr>
-            <p class="mono red">{{error}}</p>
-            {% endif %}
-            <hr>
-            {% csrf_token %} {% for question in securityquestions %}
-            <p style="font-size: 130%;" class="white"><samp>{{ question.name }}</samp>: {{ question.question }}</p>
-            <input type="text" name="{{ question.id|slugify }}" placeholder="Your Answer" class="form-control {% if question.id in incorrect %}red-form{% endif %}" />
-            <p>
-              {% if question.id in incorrect %}
-              <small class="red">Incorrect response!</small>
-              {% endif %}
-              <small>{{ question.hint }} </small> {% if question.lowercase %}
-              <small>(lowercase)</small> {% endif %}
-            </p>
-            {% endfor %}
-            <hr>
-            <center><button type="submit" class="btn btn-default btn-lg">Verify</button></center>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div <hr>
+  <h3 class="mono">{{greeting}}</h3>
+  <h6 class="mono blue">Authenticating for <samp><strong>{{ client.code }}</strong></samp>.</h6> {% if success %}
+  <hr>
+  <p class="mono green">{{success}}</p>
+  {% endif %} {% if error %}
+  <hr>
+  <p class="mono red">{{error}}</p>
+  {% endif %}
+  <hr> {% csrf_token %} {% for question in securityquestions %}
+  <p style="font-size: 130%;" class="white"><samp>{{ question.name }}</samp>: {{ question.question }}</p>
+  <input type="text" name="{{ question.id|slugify }}" placeholder="Your Answer" class="form-control {% if question.id in incorrect %}red-form{% endif %}" />
+  <p>
+    {% if question.id in incorrect %}
+    <small class="red">Incorrect response!</small> {% endif %}
+    <small>{{ question.hint }} </small> {% if question.lowercase %}
+    <small>(lowercase)</small> {% endif %}
+  </p>
+  {% endfor %}
+  <hr>
+  <center><button type="submit" class="btn btn-default btn-lg">Verify</button></center>
+  <hr>
 </form>
 {% endblock %}

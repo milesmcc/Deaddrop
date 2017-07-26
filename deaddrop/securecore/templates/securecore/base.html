@@ -16,12 +16,13 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-inverse navbar-fixed-top">
+  <nav class="navbar navbar-inverse navbar-fixed-top fullwidth">
     <div class="container">
       <div class="navbar-header">
         <a class="navbar-brand mono" href="{% url 'securecore:index' %}"><i class="fa fa-shield" aria-hidden="true"></i>&nbsp;DEADDROP</a>
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">+</button>
       </div>
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <div class="collapse navbar-collapse" id="navbar">
         <ul class="nav navbar-nav navbar-left">
           {% if logged_in %}
           <li><a href='{% url "securecore:index" %}' class="mono white">Your Drops</a></li>
@@ -41,7 +42,12 @@
     </div>
   </nav>
   <div class="container subnav">
-    <div class="content">{% block content %}???{% endblock %}</div>
+    <div class="aligned">
+      <div class="aligned-item">
+        <div class="content">{% block content %}???{% endblock %}</div>
+      </div>
+    </div>
   </div>
 </body>
+
 </html>

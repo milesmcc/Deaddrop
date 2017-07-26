@@ -1,32 +1,15 @@
 {% extends 'securecore/base.html' %} {% block title %} Please Authenticate {% endblock %} {% block content %}
-<form action="{% url 'securecore:authcode' %}" method="post">
-  <div class="outer">
-    <div class="middle">
-      <div class="inner">
-        <div class="row">
-          <div class="col-md-3"></div>
-          <div class="col-md-4">
-            {% if success %}
-            <h5 class='mono green'>{{success}}</h5><br>{% endif %}
-            <h5 class='mono'>{{greeting}}</h5>
-            <div class="row">
-              {% csrf_token %}
-              <div class="col-md-8 mono">
-                <input type="text" name="code" placeholder="Enter Code" class="form-control form-text input-lg"></input><br>
-              </div>
-              <div class="col-md-4">
-                <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-lock" aria-hidden="true"></i></button>
-              </div>
-            </div>
-            {% if error %}
-            <p class='mono red'>{{error}}</p>
-            {% else %}
-            <p class='mono'><small>Access codes are typically 8 letters.</small></p>
-            {% endif %}
-          </div>
-        </div>
-      </div>
-    </div>
+<form action="{% url 'securecore:authcode' %}" method="post" class="form-inline">
+  <div class="row">
+    {% if success %}
+    <h5 class='mono green'>{{success}}</h5><br>{% endif %}
+    <h5 class='mono'>{{greeting}}</h5> {% csrf_token %}
+    <input type="text" name="code" placeholder="Enter Code" class="form-control form-text input-lg"></input>
+    <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-lock" aria-hidden="true"></i></button> {% if error %}
+    <p class='mono red'>{{error}}</p>
+    {% else %}
+    <p class='mono'><small>Access codes are typically 8 letters.</small></p>
+    {% endif %}
   </div>
 </form>
 {% endblock %}
