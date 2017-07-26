@@ -26,6 +26,27 @@ Secure, authenticated, and monitored file 'dead drops'
 ## Setting it up
 Deaddrop is a pure Django app, and runs smoothly on both Python 2 and Python 3. Make sure to change the secret in `settings.py`, and be sure to turn `DEBUG` to `False`. Make sure that you use HTTPS to ensure that data is encrypted in transit.
 
+For security, **make sure you do the following things before deployment:**
+* Enable HSTS
+* Change the Django secret
+* Enable: `SECURE_CONTENT_TYPE_NOSNIFF`, `SECURE_BROWSER_XSS_FILTER`, `SECURE_SSL_REDIRECT`, `SESSION_COOKIE_SECURE`
+* Set `X_FRAME_OPTIONS` to `DENY`
+* Generally secure the production machine, because as of right now, DATA IS NOT ENCRYPTED AT REST.
+
+It's possible to simply copy-and-paste the following settings into the beginning of your `settings.py` file, however you should also be sure to remember to change the secret key value!
+
+```
+# Special security settings for production hardening
+SECURE_HSTS_SECONDS = 3600
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+X_FRAME_OPTIONS = 'DENY'
+```
+
+*These settings aren't default to make debugging and development quicker and easier. The default `settings.py` is NOT suitable for production use!*
+
 ## Caveats
 * Data is not encrypted at rest (on roadmap to fix, in the meantime, encrypt your uploads in .ZIP files!)
 * Answers to security questions are stored as plaintext (on roadmap to fix)
