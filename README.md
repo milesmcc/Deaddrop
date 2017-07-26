@@ -43,7 +43,10 @@ SECURE_BROWSER_XSS_FILTER = True
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 X_FRAME_OPTIONS = 'DENY'
+CSRF_COOKIE_SECURE = True
 ```
+
+If you want to be hardcore, you can also enable HTTPS HSTS preloading, however only do so if you're sure (and if you're OK with your Deaddrop url not being private)!
 
 *These settings aren't default to make debugging and development quicker and easier. The default `settings.py` is NOT suitable for production use!*
 
