@@ -27,7 +27,7 @@ class Client(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     def __str__(self):
-        return self.name
+        return self.name + " (" + self.provider.name + ")"
 
 class SecurityQuestion(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -48,7 +48,7 @@ class SecurityQuestion(models.Model):
         return string == answer
 
     def __str__(self):
-        return self.question[:32]
+        return self.question[:16] + " (" + self.client + ")"
 
 class Login(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -104,7 +104,7 @@ class Drop(models.Model):
         return True
 
     def __str__(self):
-        return self.name
+        return self.name + " (" + self.client + ")"
 
 class Download(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
